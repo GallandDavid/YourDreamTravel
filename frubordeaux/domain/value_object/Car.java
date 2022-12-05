@@ -1,4 +1,4 @@
 package frubordeaux.domain.value_object;
 
-public class Car {
+public class Car extends Service{
 }

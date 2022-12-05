@@ -1,4 +1,4 @@
 package frubordeaux.domain.value_object;
 
-public class Hotel {
+public class Hotel extends Service{
 }

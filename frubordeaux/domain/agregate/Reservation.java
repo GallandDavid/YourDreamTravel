@@ -1,17 +1,20 @@
 package frubordeaux.domain.agregate;
 
 import frubordeaux.domain.entity.FlyTicket;
-import frubordeaux.domain.value_object.Fly;
 import frubordeaux.domain.value_object.Product;
+import frubordeaux.domain.value_object.ServiceLieu;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
 public class Reservation {
     private final UUID ID = UUID.randomUUID();
     private ArrayList<FlyTicket> flys = new ArrayList<>();
-    //private Service
+
+    private Map<FlyTicket, ServiceLieu> services = new HashMap<>();
+    //private Service.java
     private Double price = 0.0;
 
     public Reservation(){}
