@@ -1,11 +1,11 @@
 package frubordeaux.domain.value_object;
 
 import java.util.Date;
-
+//modification du value object pour permettre de savoir combien de ticket son restant
 public class FlyDate {
     private final Fly ref;
     private final Date date;
-    private Integer nbTickets;
+    private final Integer nbTickets;
     private Integer nbFirstTickets;
     private Integer nbReducedTickets;
 

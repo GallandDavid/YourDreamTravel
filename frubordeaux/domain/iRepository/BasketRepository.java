@@ -1,14 +1,14 @@
 package frubordeaux.domain.iRepository;
 
-import frubordeaux.domain.agregate.Basket;
+import frubordeaux.domain.agregate.Reservation;
 
 import java.util.UUID;
 
 public interface BasketRepository {
 
-    public Basket load(UUID ID);
+    public Reservation load(UUID ID);
 
-    public void save(Basket basket);
+    public void save(Reservation reservation);
 
-    public Basket update()
+    public Reservation update()
 }
