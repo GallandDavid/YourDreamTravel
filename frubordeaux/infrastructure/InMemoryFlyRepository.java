@@ -14,7 +14,7 @@ import java.util.UUID;
 
 public class InMemoryFlyRepository implements FlyReposittory {
 
-    public String fileDB = "../database/FlyDB.json";
+    public String fileDB = "frubordeaux/database/FlyDB.json";
 
     @Override
     public Flight load(UUID ID) {

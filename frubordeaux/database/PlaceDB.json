@@ -1,0 +1,23 @@
+[
+  {
+    "ID" : "123e4567-e89b-12d3-a456-426614174000",
+    "name" : "Paris",
+    "country" : "France"
+  },
+  {
+    "ID" : "123e4507-e89b-12d3-a456-426614174000",
+    "name" : "Bordeaux",
+    "country" : "France"
+  },
+  {
+    "ID" : "123e4597-e89b-12d3-a456-426614174000",
+    "name" : "London",
+    "country" : "England"
+  },
+  {
+    "ID" : "123e4567-e89b-12d3-a456-426114174000",
+    "name" : "Madrid",
+    "country" : "Spain"
+  }
+
+]

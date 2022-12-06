@@ -1,0 +1,29 @@
+[
+  {
+    "ID" : "123e6567-e89b-12d3-a456-426614174000",
+    "flights" :
+    [
+      {
+        "ID" : "128e4567-e89b-12d3-a456-426614174000",
+        "flight" : {
+          "ID" : "124e4567-e89b-12d3-a456-426614174000",
+          "from" : {
+            "ID" : "123e4507-e89b-12d3-a456-426614174000",
+            "name" : "Bordeaux",
+            "country" : "France"
+          },
+          "too" : {
+            "ID" : "123e4567-e89b-12d3-a456-426614174000",
+            "name" : "Paris",
+            "country" : "France"
+          }
+        },
+        "date" : "on May 04 09:51:52 CDT 2009",
+        "quantity" : "2",
+        "price" : "250.0",
+        "percentageReduction" : "-20"
+      }
+    ],
+    "price" : "200.0"
+  }
+]

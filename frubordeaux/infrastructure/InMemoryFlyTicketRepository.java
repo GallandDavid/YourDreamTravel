@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class InMemoryFlyTicketRepository implements FlyTicketRepository {
-    public String fileDB = "../database/FlyTicketDB.json";
+    public String fileDB = "frubordeaux/database/FlyTicketDB.json";
 
     @Override
     public FlightTicket load(UUID ID) {

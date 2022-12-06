@@ -14,7 +14,7 @@ import java.util.UUID;
 
 public class InMemoryReservationRepository implements ReservationRepository {
 
-    public String fileDB = "../database/ReservationDB.json";
+    public String fileDB = "frubordeaux/database/ReservationDB.json";
 
     @Override
     public Reservation load(UUID ID) {

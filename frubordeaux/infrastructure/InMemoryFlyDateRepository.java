@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class InMemoryFlyDateRepository implements FlyDateRepository {
-    public String fileDB = "../database/FlyDateDB.json";
+    public String fileDB = "frubordeaux/database/FlyDateDB.json";
 
     @Override
     public FlyDate load(UUID ID) {

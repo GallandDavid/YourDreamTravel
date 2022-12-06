@@ -1,0 +1,28 @@
+[
+  {
+    "ID" : "124e4567-e89b-12d3-a456-426614174000",
+    "from" : {
+      "ID" : "123e4507-e89b-12d3-a456-426614174000",
+      "name" : "Bordeaux",
+      "country" : "France"
+    },
+    "too" : {
+      "ID" : "123e4567-e89b-12d3-a456-426614174000",
+      "name" : "Paris",
+      "country" : "France"
+    }
+  },
+  {
+    "ID" : "124e4567-e89b-12d3-a456-426614134000",
+    "from" : {
+      "ID" : "123e4567-e89b-12d3-a456-426614174000",
+      "name" : "Paris",
+      "country" : "France"
+    },
+    "too" : {
+      "ID" : "123e4507-e89b-12d3-a456-426614174000",
+      "name" : "Bordeaux",
+      "country" : "France"
+    }
+  }
+]

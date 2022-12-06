@@ -1,10 +1,12 @@
 package frubordeaux.domain.value_object;
 
+import frubordeaux.domain.Displayable;
+
 import java.util.Date;
 import java.util.UUID;
 
 //modification du value object pour permettre de savoir combien de ticket il reste
-public class FlyDate {
+public class FlyDate  implements Displayable {
     private final UUID ID = UUID.randomUUID();
     private final Flight ref;
     private final Date date;
@@ -43,5 +45,10 @@ public class FlyDate {
     }
     public UUID getID() {
         return ID;
+    }
+
+    @Override
+    public String displayRead() {
+        return null;
     }
 }

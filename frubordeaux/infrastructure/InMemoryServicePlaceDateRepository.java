@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class InMemoryServicePlaceDateRepository implements ServicePlaceDateRepository {
-    public String fileDB = "../database/ServicePlaceDateDB.json";
+    public String fileDB = "frubordeaux/database/ServicePlaceDateDB.json";
 
     @Override
     public ServicePlaceDate load(UUID ID) {

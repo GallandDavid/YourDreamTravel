@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class InMemoryServicePlaceRepository implements ServicePlaceRepository {
-    public String fileDB = "../database/ServicePlaceDB.json";
+    public String fileDB = "frubordeaux/database/ServicePlaceDB.json";
 
     @Override
     public ServicePlace load(UUID ID) {

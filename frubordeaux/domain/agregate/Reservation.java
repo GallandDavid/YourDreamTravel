@@ -1,30 +1,37 @@
 package frubordeaux.domain.agregate;
 
+import com.google.gson.annotations.SerializedName;
+import frubordeaux.domain.Displayable;
 import frubordeaux.domain.entity.FlightTicket;
 import frubordeaux.domain.value_object.Product;
-import frubordeaux.domain.entity.ServicePlace;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
-public class Reservation {
+public class Reservation  implements Displayable {
+    @SerializedName("ID")
     private final UUID ID;
-    private ArrayList<FlightTicket> flights;
-
-    private Map<FlightTicket, ServicePlace> services;
-    //private Service.java
+    @SerializedName("flights")
+    private ArrayList<FlightTicket> flights;/*
+    @SerializedName("services")
+    private Map<FlightTicket, ServicePlace> services;*/
+    @SerializedName("price")
     private Double price;
 
 
     public Reservation(){
         flights = new ArrayList<>();
-        ID = UUID.randomUUID();
-        services = new HashMap<>();
+        ID = UUID.randomUUID();/*
+        services = new HashMap<>();*/
         price = 0.0;
     }
 
+
+    /*
+    * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    *  APPLIQUER REDUCTION DE CHAQUE VOL A LEUR PRIX
+    * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    * */
     /**
      * Calculate the total price of the reservation
      *
@@ -121,5 +128,10 @@ public class Reservation {
             }
         }
         if(!find) { /*ERROR MESSAGE*/}
+    }
+
+    @Override
+    public String displayRead() {
+        return null;
     }
 }

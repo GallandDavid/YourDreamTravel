@@ -1,12 +1,13 @@
 package frubordeaux.domain.entity;
 
+import frubordeaux.domain.Displayable;
 import frubordeaux.domain.value_object.Service;
 
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.UUID;
 
-public abstract class ServicePlace {
+public class ServicePlace  implements Displayable {
 
 
 
@@ -29,5 +30,10 @@ public abstract class ServicePlace {
 
     public ArrayList<ServicePlace> getChild() {
         return child;
+    }
+
+    @Override
+    public String displayRead() {
+        return null;
     }
 }

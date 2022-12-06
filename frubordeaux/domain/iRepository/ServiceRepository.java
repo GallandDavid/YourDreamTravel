@@ -1,6 +1,7 @@
 package frubordeaux.domain.iRepository;
 import frubordeaux.domain.value_object.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 public interface ServiceRepository {
@@ -9,5 +10,7 @@ public interface ServiceRepository {
 
     void save(Service reservation);
 
-    Service update();
+    void update(Service service);
+
+    List<Service> loadAll();
 }

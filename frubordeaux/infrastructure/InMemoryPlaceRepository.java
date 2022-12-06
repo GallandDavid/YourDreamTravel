@@ -1,7 +1,7 @@
 package frubordeaux.infrastructure;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 import frubordeaux.domain.iRepository.PlaceRepository;
 import frubordeaux.domain.value_object.Place;
 
@@ -9,14 +9,12 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import com.google.gson.reflect.TypeToken;
 
 public class InMemoryPlaceRepository implements PlaceRepository {
 
-    public String fileDB = "../database/PlaceDB.json";
+    public String fileDB = "frubordeaux/database/PlaceDB.json";
     public InMemoryPlaceRepository(){
 
     }

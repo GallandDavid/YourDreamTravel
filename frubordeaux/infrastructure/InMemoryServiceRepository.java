@@ -2,7 +2,6 @@ package frubordeaux.infrastructure;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import frubordeaux.domain.agregate.Reservation;
 import frubordeaux.domain.iRepository.ServiceRepository;
 import frubordeaux.domain.value_object.Service;
 
@@ -14,7 +13,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class InMemoryServiceRepository implements ServiceRepository {
-    public String fileDB = "../database/ServiceDB.json";
+    public String fileDB = "frubordeaux/database/ServiceDB.json";
 
     @Override
     public Service load(UUID ID) {
@@ -51,7 +50,7 @@ public class InMemoryServiceRepository implements ServiceRepository {
     }
 
     @Override
-    public void update(Reservation service){
+    public void update(Service service){
 
     }
 

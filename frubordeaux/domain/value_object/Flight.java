@@ -1,16 +1,19 @@
 package frubordeaux.domain.value_object;
 
-import java.util.ArrayList;
-import java.util.Date;
+import com.google.gson.annotations.SerializedName;
+import frubordeaux.domain.Displayable;
+
 import java.util.UUID;
 
-public class Flight extends Product{
-
+public class Flight extends Product implements Displayable {
+    @SerializedName("ID")
     private final UUID ID = UUID.randomUUID();
-    private final String from;
-    private final String to;
+    @SerializedName("from")
+    private final Place from;
+    @SerializedName("too")
+    private final Place to;
 
-    public Flight(String ref, String name, String description, Double price, String from, String to) {
+    public Flight(String ref, String name, String description, Double price, Place from, Place to) {
         super(ref, name, description, price);
         this.from = from;
         this.to = to;
@@ -18,14 +21,19 @@ public class Flight extends Product{
 
     /* GETTERS */
 
-    public String getFrom() {
+    public Place getFrom() {
         return from;
     }
-    public String getTo() {
+    public Place getTo() {
         return to;
     }
 
     public UUID getID() {
         return ID;
+    }
+
+    @Override
+    public String displayRead() {
+        return null;
     }
 }
