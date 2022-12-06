@@ -22,16 +22,28 @@ public class FlightTicket {
         this.percentageReduction = percentageReduction;
     }
 
-    public void changeQuantity(Integer place){
-        this.quantity = place;
+    /**
+     * Modify the quantity of the air ticket
+     * @param quantity
+     */
+    public void changeQuantity(Integer quantity){
+        this.quantity = quantity;
         this.price = getFly().getPrice() * getQuantity().doubleValue();
     }
 
+    /**
+     * add a quantity to the number of air tickets
+     * @param quantity
+     */
     public void addQuantity(Integer quantity){
         this.quantity = this.quantity + quantity;
         this.price = getFly().getPrice() * getQuantity().doubleValue();
     }
 
+    /**
+     * remove a quantity to the number of air tickets
+     * @param quantity
+     */
     public void removeQuantity(Integer quantity){
         this.quantity = this.quantity - quantity;
         if(this.quantity < 0) this.quantity = 0;
@@ -39,6 +51,7 @@ public class FlightTicket {
     }
 
     /** GETTERS **/
+
     public Integer getPercentageReduction() {
         return percentageReduction;
     }

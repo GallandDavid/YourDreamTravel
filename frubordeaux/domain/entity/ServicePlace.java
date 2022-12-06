@@ -8,8 +8,6 @@ import java.util.UUID;
 
 public abstract class ServicePlace {
 
-
-
     public final UUID ID = UUID.randomUUID();
     private Optional<Service> service;
     private ArrayList<ServicePlace> child;

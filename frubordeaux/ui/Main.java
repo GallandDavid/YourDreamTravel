@@ -1,6 +1,6 @@
 package frubordeaux.ui;
 
-import frubordeaux.domain.value_object.Place;
+import frubordeaux.domain.value_object.Location;
 
 import java.util.List;
 
@@ -38,13 +38,13 @@ public class Main {
         System.out.println("3) Retrieve Reservation");
     }
 
-    public void showPlace(List<Place> places){
+    public void showPlace(List<Location> locations){
         System.out.println("List of place that can be a start/end travel :");
-        for(Place place : places){
-            System.out.println("\t- " + place.getName() + ", " + place.getCountry());
-            System.out.println("\t  " + place.getID());
-            System.out.println("\t  " + place.getRepository());
-            System.out.println("\t  " + place.getServiceRepository());
+        for(Location location : locations){
+            System.out.println("\t- " + location.getName() + ", " + location.getCountry());
+            System.out.println("\t  " + location.getID());
+            System.out.println("\t  " + location.getRepository());
+            System.out.println("\t  " + location.getServiceRepository());
             System.out.println();
         }
 

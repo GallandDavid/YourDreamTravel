@@ -3,13 +3,12 @@ package frubordeaux.infrastructure;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import frubordeaux.domain.iRepository.PlaceRepository;
-import frubordeaux.domain.value_object.Place;
+import frubordeaux.domain.value_object.Location;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import com.google.gson.reflect.TypeToken;
@@ -22,9 +21,9 @@ public class InMemoryPlaceRepository implements PlaceRepository {
     }
 
     @Override
-    public Place load(UUID ID) {
-        List<Place> objects = loadAll();
-        for(Place obj : objects) {
+    public Location load(UUID ID) {
+        List<Location> objects = loadAll();
+        for(Location obj : objects) {
             System.out.println(obj.getName());
             if (obj.getID().equals(ID))
                 return obj;
@@ -36,18 +35,18 @@ public class InMemoryPlaceRepository implements PlaceRepository {
     }
 
     @Override
-    public void save(Place place) {
+    public void save(Location location) {
         Gson gson = new Gson();
-        List<Place> objects = loadAll();
+        List<Location> objects = loadAll();
         boolean find = false;
-        for(Place obj : objects){
-            if(obj.getID() == place.getID()){
+        for(Location obj : objects){
+            if(obj.getID() == location.getID()){
                 find = true;
                 //update(place)
             }
         }
         if(!find) {
-            objects.add(place);
+            objects.add(location);
             try (FileWriter writer = new FileWriter(fileDB)) {
                 gson.toJson(objects, writer);
             } catch (IOException e) {
@@ -57,12 +56,12 @@ public class InMemoryPlaceRepository implements PlaceRepository {
     }
 
     @Override
-    public List<Place> loadAll() {
+    public List<Location> loadAll() {
         Gson gson = new Gson();
         // 1. JSON file to Java object
-        List<Place> objects = null;
+        List<Location> objects = null;
         try {
-            objects = gson.fromJson(new FileReader(fileDB), new TypeToken<List<Place>>() {}.getType());
+            objects = gson.fromJson(new FileReader(fileDB), new TypeToken<List<Location>>() {}.getType());
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }

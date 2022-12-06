@@ -6,14 +6,22 @@ import frubordeaux.infrastructure.InMemoryServicePlaceRepository;
 
 import java.util.UUID;
 
-public class Place {
+public class Location {
 
     @SerializedName("ID")
     public UUID ID = UUID.randomUUID();
+
     @SerializedName("name")
     private final String name;
+
     @SerializedName("country")
     private final String country;
+
+    @SerializedName("service_repo")
+    private final InMemoryServicePlaceRepository serviceRepository;
+
+    @SerializedName("fly_repo")
+    private final InMemoryFlyRepository repository;
 
     public InMemoryServicePlaceRepository getServiceRepository() {
         return serviceRepository;
@@ -23,12 +31,11 @@ public class Place {
         return repository;
     }
 
-    @SerializedName("service_repo")
-    private final InMemoryServicePlaceRepository serviceRepository = new InMemoryServicePlaceRepository();
-    @SerializedName("fly_repo")
-    private final InMemoryFlyRepository repository = new InMemoryFlyRepository();
 
-    public Place(String name, String country){
+    public Location(String name, String country){
+        serviceRepository = new InMemoryServicePlaceRepository();
+        repository = new InMemoryFlyRepository();
+
         this.name = name;
         this.country = country;
     }
