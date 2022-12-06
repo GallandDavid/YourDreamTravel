@@ -4,17 +4,20 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
 
-public class Fly extends Product{
+public class Flight extends Product{
 
     private final UUID ID = UUID.randomUUID();
     private final String from;
     private final String to;
 
-    public Fly(String ref, String name, String description, Double price, String from, String to) {
+    public Flight(String ref, String name, String description, Double price, String from, String to) {
         super(ref, name, description, price);
         this.from = from;
         this.to = to;
     }
+
+    /* GETTERS */
+
     public String getFrom() {
         return from;
     }

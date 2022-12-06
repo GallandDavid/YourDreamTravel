@@ -3,7 +3,7 @@ package frubordeaux.infrastructure;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import frubordeaux.domain.iRepository.FlyReposittory;
-import frubordeaux.domain.value_object.Fly;
+import frubordeaux.domain.value_object.Flight;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -17,9 +17,9 @@ public class InMemoryFlyRepository implements FlyReposittory {
     public String fileDB = "../database/FlyDB.json";
 
     @Override
-    public Fly load(UUID ID) {
-        List<Fly> objects = loadAll();
-        for(Fly obj : objects) {
+    public Flight load(UUID ID) {
+        List<Flight> objects = loadAll();
+        for(Flight obj : objects) {
             if (obj.getID().equals(ID))
                 return obj;
         }
@@ -30,18 +30,18 @@ public class InMemoryFlyRepository implements FlyReposittory {
     }
 
     @Override
-    public void save(Fly fly) {
+    public void save(Flight flight) {
         Gson gson = new Gson();
-        List<Fly> objects = loadAll();
+        List<Flight> objects = loadAll();
         boolean find = false;
-        for(Fly obj : objects){
-            if(obj.getID() == fly.getID()){
+        for(Flight obj : objects){
+            if(obj.getID() == flight.getID()){
                 find = true;
                 //update(flyDate);
             }
         }
         if(!find) {
-            objects.add(fly);
+            objects.add(flight);
             try (FileWriter writer = new FileWriter(fileDB)) {
                 gson.toJson(objects, writer);
             } catch (IOException e) {
@@ -51,16 +51,16 @@ public class InMemoryFlyRepository implements FlyReposittory {
     }
 
     @Override
-    public void update(Fly fly) {
+    public void update(Flight flight) {
     }
 
     @Override
-    public List<Fly> loadAll() {
+    public List<Flight> loadAll() {
         Gson gson = new Gson();
         // 1. JSON file to Java object
-        List<Fly> objects = null;
+        List<Flight> objects = null;
         try {
-            objects = gson.fromJson(new FileReader(fileDB), new TypeToken<List<Fly>>() {}.getType());
+            objects = gson.fromJson(new FileReader(fileDB), new TypeToken<List<Flight>>() {}.getType());
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }

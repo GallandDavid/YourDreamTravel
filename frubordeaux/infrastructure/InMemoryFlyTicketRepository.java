@@ -2,7 +2,7 @@ package frubordeaux.infrastructure;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import frubordeaux.domain.entity.FlyTicket;
+import frubordeaux.domain.entity.FlightTicket;
 import frubordeaux.domain.iRepository.FlyTicketRepository;
 
 import java.io.FileNotFoundException;
@@ -16,9 +16,9 @@ public class InMemoryFlyTicketRepository implements FlyTicketRepository {
     public String fileDB = "../database/FlyTicketDB.json";
 
     @Override
-    public FlyTicket load(UUID ID) {
-        List<FlyTicket> objects = loadAll();
-        for(FlyTicket obj : objects) {
+    public FlightTicket load(UUID ID) {
+        List<FlightTicket> objects = loadAll();
+        for(FlightTicket obj : objects) {
             if (obj.getID().equals(ID))
                 return obj;
         }
@@ -29,11 +29,11 @@ public class InMemoryFlyTicketRepository implements FlyTicketRepository {
     }
 
     @Override
-    public void save(FlyTicket flyTicket) {
+    public void save(FlightTicket flyTicket) {
         Gson gson = new Gson();
-        List<FlyTicket> objects = loadAll();
+        List<FlightTicket> objects = loadAll();
         boolean find = false;
-        for(FlyTicket obj : objects){
+        for(FlightTicket obj : objects){
             if(obj.getID() == flyTicket.getID()){
                 find = true;
                 //update(flyDate);
@@ -50,16 +50,16 @@ public class InMemoryFlyTicketRepository implements FlyTicketRepository {
     }
 
     @Override
-    public void update(FlyTicket flyTicket) {
+    public void update(FlightTicket flyTicket) {
     }
 
     @Override
-    public List<FlyTicket> loadAll() {
+    public List<FlightTicket> loadAll() {
         Gson gson = new Gson();
         // 1. JSON file to Java object
-        List<FlyTicket> objects = null;
+        List<FlightTicket> objects = null;
         try {
-            objects = gson.fromJson(new FileReader(fileDB), new TypeToken<List<FlyTicket>>() {}.getType());
+            objects = gson.fromJson(new FileReader(fileDB), new TypeToken<List<FlightTicket>>() {}.getType());
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }

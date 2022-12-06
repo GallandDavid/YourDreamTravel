@@ -1,6 +1,5 @@
 package frubordeaux.domain.iRepository;
 
-import frubordeaux.domain.value_object.Fly;
 import frubordeaux.domain.value_object.ServicePlaceDate;
 
 import java.util.List;

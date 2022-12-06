@@ -1,18 +1,16 @@
 package frubordeaux.domain.iRepository;
 
-import frubordeaux.domain.agregate.Reservation;
-import frubordeaux.domain.value_object.Fly;
-import frubordeaux.domain.value_object.FlyDate;
+import frubordeaux.domain.value_object.Flight;
 
 import java.util.List;
 import java.util.UUID;
 
 public interface FlyReposittory {
-    Fly load(UUID ID);
+    Flight load(UUID ID);
 
-    void save(Fly reservation);
+    void save(Flight reservation);
 
-    void update(Fly fly);
+    void update(Flight flight);
 
-    List<Fly> loadAll();
+    List<Flight> loadAll();
 }

@@ -1,18 +1,17 @@
 package frubordeaux.domain.iRepository;
 
-import frubordeaux.domain.entity.FlyTicket;
-import frubordeaux.domain.value_object.Fly;
+import frubordeaux.domain.entity.FlightTicket;
 
 import java.util.List;
 import java.util.UUID;
 
 public interface FlyTicketRepository {
 
-    FlyTicket load(UUID ID);
+    FlightTicket load(UUID ID);
 
-    void save(FlyTicket reservation);
+    void save(FlightTicket reservation);
 
-    void update(FlyTicket flyTicket);
+    void update(FlightTicket flyTicket);
 
-    List<FlyTicket> loadAll();
+    List<FlightTicket> loadAll();
 }

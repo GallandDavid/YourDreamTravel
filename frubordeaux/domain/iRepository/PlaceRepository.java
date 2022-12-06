@@ -1,10 +1,8 @@
 package frubordeaux.domain.iRepository;
 
-import frubordeaux.domain.value_object.Fly;
 import frubordeaux.domain.value_object.Place;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 

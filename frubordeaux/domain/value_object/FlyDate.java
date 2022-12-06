@@ -3,16 +3,16 @@ package frubordeaux.domain.value_object;
 import java.util.Date;
 import java.util.UUID;
 
-//modification du value object pour permettre de savoir combien de ticket son restant
+//modification du value object pour permettre de savoir combien de ticket il reste
 public class FlyDate {
     private final UUID ID = UUID.randomUUID();
-    private final Fly ref;
+    private final Flight ref;
     private final Date date;
     private final Integer nbTickets;
     private Integer nbFirstTickets;
     private Integer nbReducedTickets;
 
-    public FlyDate(Fly ref, Date date, Integer nbTickets, Integer nbFirstTickets, Integer nbReducedTickets){
+    public FlyDate(Flight ref, Date date, Integer nbTickets, Integer nbFirstTickets, Integer nbReducedTickets){
         this.ref = ref;
         this.date = date;
         this.nbTickets = nbTickets;
@@ -20,7 +20,9 @@ public class FlyDate {
         this.nbReducedTickets = nbReducedTickets;
     }
 
-    public Fly getFly() {
+    /* GETTER */
+
+    public Flight getFly() {
         return ref;
     }
 
