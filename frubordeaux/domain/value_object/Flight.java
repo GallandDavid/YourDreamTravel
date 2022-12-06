@@ -9,11 +9,11 @@ public class Flight extends Product implements Displayable {
     @SerializedName("ID")
     private final UUID ID = UUID.randomUUID();
     @SerializedName("from")
-    private final Place from;
+    private final Location from;
     @SerializedName("too")
-    private final Place to;
+    private final Location to;
 
-    public Flight(String ref, String name, String description, Double price, Place from, Place to) {
+    public Flight(String ref, String name, String description, Double price, Location from, Location to) {
         super(ref, name, description, price);
         this.from = from;
         this.to = to;
@@ -21,10 +21,10 @@ public class Flight extends Product implements Displayable {
 
     /* GETTERS */
 
-    public Place getFrom() {
+    public Location getFrom() {
         return from;
     }
-    public Place getTo() {
+    public Location getTo() {
         return to;
     }
 

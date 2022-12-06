@@ -9,8 +9,6 @@ import java.util.UUID;
 
 public class ServicePlace  implements Displayable {
 
-
-
     public final UUID ID = UUID.randomUUID();
     private Optional<Service> service;
     private ArrayList<ServicePlace> child;

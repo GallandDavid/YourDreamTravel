@@ -34,8 +34,8 @@ public class Main {
                     }
                     if(resultat.getBytes()[2] == '4'){
                         InMemoryPlaceRepository flRepo = new InMemoryPlaceRepository();
-                        List<Place> places = flRepo.loadAll();
-                        ui.displayListPlace(places);
+                        List<Location> locations = flRepo.loadAll();
+                        ui.displayListPlace(locations);
                     }
                     if(resultat.getBytes()[2] == '5'){
                         InMemoryReservationRepository flRepo = new InMemoryReservationRepository();

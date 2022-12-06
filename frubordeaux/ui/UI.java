@@ -108,8 +108,8 @@ public class UI {
         System.out.println("4) Places");
         System.out.println("5) Reservation");
         System.out.println("6) Service");
-        System.out.println("5) Service at Place");
-        System.out.println("6) Service Date at Place ");
+        System.out.println("7) Service at Place");
+        System.out.println("8) Service Date at Place ");
     }
 
     private void chooseMainAction() {
@@ -123,13 +123,13 @@ public class UI {
         System.out.println("2) Write");
     }
 
-    public void showPlace(List<Place> places){
+    public void showPlace(List<Location> locations){
         System.out.println("List of place that can be a start/end travel :");
-        for(Place place : places){
-            System.out.println("\t- " + place.getName() + ", " + place.getCountry());
-            System.out.println("\t  " + place.getID());
-            System.out.println("\t  " + place.getRepository());
-            System.out.println("\t  " + place.getServiceRepository());
+        for(Location location : locations){
+            System.out.println("\t- " + location.getName() + ", " + location.getCountry());
+            System.out.println("\t  " + location.getID());
+            System.out.println("\t  " + location.getRepository());
+            System.out.println("\t  " + location.getServiceRepository());
             System.out.println();
         }
 
@@ -155,9 +155,9 @@ public class UI {
         }
     }
 
-    public void displayListPlace(List<Place> places){
-        for(Place place : places){
-            System.out.println(place.displayRead());
+    public void displayListPlace(List<Location> locations){
+        for(Location location : locations){
+            System.out.println(location.displayRead());
         }
     }
 

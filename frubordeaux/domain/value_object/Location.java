@@ -7,7 +7,7 @@ import frubordeaux.infrastructure.InMemoryServicePlaceRepository;
 
 import java.util.UUID;
 
-public class Place  implements Displayable {
+public class Location  implements Displayable {
 
     @SerializedName("ID")
     public UUID ID = UUID.randomUUID();
@@ -20,6 +20,11 @@ public class Place  implements Displayable {
     @SerializedName("fly_repo")
     private final InMemoryFlyRepository repository = new InMemoryFlyRepository();
 
+    public Location(String name, String country){
+        this.name = name;
+        this.country = country;
+    }
+
     public InMemoryServicePlaceRepository getServiceRepository() {
         return serviceRepository;
     }
@@ -27,14 +32,6 @@ public class Place  implements Displayable {
     public InMemoryFlyRepository getRepository() {
         return repository;
     }
-
-
-
-    public Place(String name, String country){
-        this.name = name;
-        this.country = country;
-    }
-
     public UUID getID() {
         return ID;
     }
