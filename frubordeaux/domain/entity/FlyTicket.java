@@ -14,9 +14,6 @@ public class FlyTicket {
     private Date date;
     private Integer place;
     private Double price = 0.0;
-
-
-
     private Integer percentageReduction;
 
     public FlyTicket(Fly fly, Date date, Integer place, Integer percentageReduction){

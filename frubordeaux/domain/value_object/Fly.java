@@ -2,10 +2,11 @@ package frubordeaux.domain.value_object;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.UUID;
 
 public class Fly extends Product{
 
-
+    private final UUID ID = UUID.randomUUID();
     private final String from;
     private final String to;
 
@@ -19,5 +20,9 @@ public class Fly extends Product{
     }
     public String getTo() {
         return to;
+    }
+
+    public UUID getID() {
+        return ID;
     }
 }

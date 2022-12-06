@@ -1,4 +1,7 @@
-package frubordeaux.domain.value_object;
+package frubordeaux.domain.entity;
+
+import frubordeaux.domain.value_object.Fly;
+import frubordeaux.domain.value_object.FlyDate;
 
 import java.util.ArrayList;
 import java.util.HashMap;
