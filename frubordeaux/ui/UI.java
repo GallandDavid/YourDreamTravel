@@ -25,10 +25,8 @@ public class UI {
     }
 
     private String applyGoodAction() {
-        Scanner myObj = new Scanner(System.in);  // Create a Scanner object
-        System.out.println("Systeme on menu : " + menuIndice );
+        Scanner myObj = new Scanner(System.in);
         System.out.println("Make your choice :");
-
         String input = myObj.nextLine();
         if(menuIndice == 0){
             if(input.equals("1")) {
@@ -39,47 +37,29 @@ public class UI {
                 menuIndice = 3;
             }
         }else if(menuIndice == 2){
-            if(input.equals("1")){
-                menuIndice = 21;
-            }else if(input.equals("2")){
-                menuIndice = 22;
-            }
+            if(input.equals("0")) menuIndice = 0;
+            else if(input.equals("1")) menuIndice = 21;
+            else if(input.equals("2")) menuIndice = 22;
         }else if(menuIndice == 21){
-            if(input.equals("1")) {
-                return "R 1";
-            }else if(input.equals("2")) {
-                return "R 2";
-            }else if(input.equals("3")) {
-                return "R 3";
-            }else if(input.equals("4")) {
-                return "R 4";
-            }else if(input.equals("5")) {
-                return "R 5";
-            }else if(input.equals("6")) {
-                return "R 6";
-            }else if(input.equals("7")) {
-                return "R 7";
-            }else if(input.equals("8")) {
-                return "R 8";
-            }
+            if(input.equals("0")) menuIndice = 0;
+            else if(input.equals("1")) return "R 1";
+            else if(input.equals("2")) return "R 2";
+            else if(input.equals("3")) return "R 3";
+            else if(input.equals("4")) return "R 4";
+            else if(input.equals("5")) return "R 5";
+            else if(input.equals("6")) return "R 6";
+            else if(input.equals("7")) return "R 7";
+            else if(input.equals("8")) return "R 8";
         }else if(menuIndice == 22){
-            if(input.equals("1")) {
-                menuIndice = 1;
-            }else if(input.equals("2")) {
-                menuIndice = 2;
-            }else if(input.equals("3")) {
-                menuIndice = 3;
-            }else if(input.equals("4")) {
-                menuIndice = 1;
-            }else if(input.equals("5")) {
-                menuIndice = 2;
-            }else if(input.equals("6")) {
-                menuIndice = 3;
-            }else if(input.equals("7")) {
-                menuIndice = 1;
-            }else if(input.equals("8")) {
-                menuIndice = 2;
-            }
+            if(input.equals("0")) menuIndice = 0;
+            else if(input.equals("1")) return "W 1";
+            else if(input.equals("2")) return "w 2";
+            else if(input.equals("3")) return "w 3";
+            else if(input.equals("4")) return "W 4";
+            else if(input.equals("5")) return "W 5";
+            else if(input.equals("6")) return "W 6";
+            else if(input.equals("7")) return "W 7";
+            else if(input.equals("8")) return "W 8 ";
         }
         return "";
     }
@@ -102,9 +82,10 @@ public class UI {
         }
     }
     private void chooseData() {
+        System.out.println("0) Back ");
         System.out.println("1) Flight ");
         System.out.println("2) Flight Date");
-        System.out.println("3) Tikets");
+        System.out.println("3) Tickets");
         System.out.println("4) Places");
         System.out.println("5) Reservation");
         System.out.println("6) Service");
@@ -115,38 +96,23 @@ public class UI {
     private void chooseMainAction() {
         System.out.println("1) Reservation");
         System.out.println("2) Data");
-        System.out.println("3) Retrieve Reservation");
     }
 
     private void chooseActionData(){
+        System.out.println("0) Back ");
         System.out.println("1) Read");
         System.out.println("2) Write");
     }
 
-    public void showPlace(List<Location> locations){
-        System.out.println("List of place that can be a start/end travel :");
-        for(Location location : locations){
-            System.out.println("\t- " + location.getName() + ", " + location.getCountry());
-            System.out.println("\t  " + location.getID());
-            System.out.println("\t  " + location.getRepository());
-            System.out.println("\t  " + location.getServiceRepository());
-            System.out.println();
-        }
-
-    }
-
     //trouver un truc qui marche sur IDE
-    public final static void clearConsole()
-    {
-
-    }
+    public final static void clearConsole() { }
 
     /*
     * A faire pour assembler les 8 fonction suivante en 1
     *
-    public void displayList(List<Displayable> flight) {
 
-    }
+    public void displayList(List<Displayable> flight) {}
+
     */
 
     public void displayListFlight(List<Flight> flight) {
@@ -195,5 +161,73 @@ public class UI {
         for(ServicePlaceDate servicePlaceDate : servicesPlaceDate){
             System.out.println(servicePlaceDate.displayRead());
         }
+    }
+
+    public Flight writeFlight(List<Location> locations) {
+        Location from = null;
+        Location to = null;
+        Integer from_index = -1;
+        String input;
+        Integer imput_int;
+        Scanner myObj = new Scanner(System.in);
+        System.out.println("Add a new Flight on data base :");
+        boolean running = true;
+        while(running) {
+            System.out.println("Choose a departure location by a number:");
+            for (Integer i = 0; i < locations.size(); i++) {
+                System.out.println();
+                System.out.println("\t" + (i + 1) + ") " + locations.get(i).displayCompact());
+            }
+            input = myObj.nextLine();
+            imput_int = Integer.parseInt(input);
+            if (imput_int >= 1 && imput_int <= locations.size()) {
+                from = locations.get(imput_int - 1);
+                from_index = imput_int - 1;
+                running = false;
+            }
+        }
+        running = true;
+        while(running) {
+            System.out.println("Choose a place of arrival by a number:");
+            for (Integer i = 0; i < locations.size(); i++) {
+                if(!(from_index == i)) {
+                    System.out.println();
+                    System.out.println("\t" + (i + 1) + ") " + locations.get(i).displayCompact());
+                }
+            }
+            input = myObj.nextLine();
+            imput_int = Integer.parseInt(input);
+            if (imput_int >= 1 && imput_int <= locations.size()){
+                to = locations.get(imput_int - 1);
+                running = false;
+            }
+        }
+        return new Flight(from,to);
+    }
+
+    public void writeFlightDate() {
+    }
+
+    public void writeTicket() {
+    }
+
+    public void writePlace() {
+    }
+
+    public void writeReservation() {
+    }
+
+    public void writeService() {
+    }
+
+    public void writeServicePlace() {
+    }
+
+    public void writeServiceDatePlace() {
+    }
+
+    public void flightAlreadyExist() {
+        System.out.println("Sorry, this flight already exist. Try again");
+
     }
 }

@@ -53,4 +53,17 @@ public class Location  implements Displayable {
         str += ("service_repo : " + serviceRepository + "\n");
         return str;
     }
+
+    public String displayCompact() {
+        String str = "";
+        str += ("Place : " + name + " in " + country + "\n");
+        return str;
+    }
+
+    @Override
+    public boolean equals(Object obj){
+        Location location = (Location) obj;
+        if(location.name.equals(name) && location.country.equals(country)) return true;
+        return false;
+    }
 }

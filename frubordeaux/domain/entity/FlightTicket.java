@@ -16,17 +16,20 @@ public class FlightTicket implements Displayable {
     private Date date;
     @SerializedName("quantity")
     private Integer quantity;
+    @SerializedName("ticket_price")
+    private Double ticket_price;
     @SerializedName("price")
     private Double price;
     @SerializedName("percentageReduction")
     private Integer percentageReduction;
 
-    public FlightTicket(Flight flight, Date date, Integer quantity, Integer percentageReduction){
+    public FlightTicket(Flight flight, Date date, Integer quantity, Double ticket_price, Integer percentageReduction){
         this.ID  = UUID.randomUUID();
         this.flight = flight;
         this.date = date;
         this.quantity = quantity;
-        this.price = flight.getPrice() * quantity.doubleValue();
+        this.ticket_price = ticket_price;
+        this.price = getPrice();
         this.percentageReduction = percentageReduction;
     }
 
@@ -36,7 +39,7 @@ public class FlightTicket implements Displayable {
      */
     public void changeQuantity(Integer quantity){
         this.quantity = quantity;
-        this.price = getFly().getPrice() * getQuantity().doubleValue();
+        this.price = ticket_price * getQuantity().doubleValue();
     }
 
     /**
@@ -45,7 +48,7 @@ public class FlightTicket implements Displayable {
      */
     public void addQuantity(Integer quantity){
         this.quantity = this.quantity + quantity;
-        this.price = getFly().getPrice() * getQuantity().doubleValue();
+        this.price = price + ticket_price * getQuantity().doubleValue();
     }
 
     /**
@@ -55,8 +58,9 @@ public class FlightTicket implements Displayable {
     public void removeQuantity(Integer quantity){
         this.quantity = this.quantity - quantity;
         if(this.quantity < 0) this.quantity = 0;
-        this.price = getFly().getPrice() * getQuantity().doubleValue();
+        this.price = price - ticket_price * getQuantity().doubleValue();
     }
+
 
     /** GETTERS **/
 
@@ -81,6 +85,12 @@ public class FlightTicket implements Displayable {
 
     @Override
     public String displayRead() {
-        return null;
+        String str = "Flight ticket n°" + ID + "\n";
+        str += "The " + date + "\n";
+        str += "For the flight : " + "\n" + flight.displayRead();
+        str += "For " + quantity + " people" + "\n";
+        str += "With " + percentageReduction + "%" + "\n";
+        str += "Cost : " + price + "€" + "\n";
+        return str;
     }
 }

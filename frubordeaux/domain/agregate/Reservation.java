@@ -132,6 +132,10 @@ public class Reservation  implements Displayable {
 
     @Override
     public String displayRead() {
-        return null;
+        String str = "This is the reservation n°" + ID + "\n";
+        str += "Contains flights : " + "\n";
+        for(FlightTicket flt : flights) str += flt.displayRead();
+        str += "This travel cost : " + price + "€" + "\n";
+        return str;
     }
 }

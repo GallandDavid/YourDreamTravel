@@ -30,14 +30,14 @@ public class InMemoryFlyRepository implements FlyReposittory {
     }
 
     @Override
-    public void save(Flight flight) {
+    public Integer save(Flight flight) {
         Gson gson = new Gson();
         List<Flight> objects = loadAll();
         boolean find = false;
         for(Flight obj : objects){
-            if(obj.getID() == flight.getID()){
+            if(obj.equals(flight)){
                 find = true;
-                //update(flyDate);
+                return -1;
             }
         }
         if(!find) {
@@ -48,11 +48,9 @@ public class InMemoryFlyRepository implements FlyReposittory {
                 e.printStackTrace();
             }
         }
+        return 1;
     }
 
-    @Override
-    public void update(Flight flight) {
-    }
 
     @Override
     public List<Flight> loadAll() {

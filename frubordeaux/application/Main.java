@@ -17,48 +17,65 @@ public class Main {
             resultat = ui.interfaceUtilisateur();
             if(!resultat.equals("")){
                 if(resultat.getBytes()[0] == 'R'){
-                    if(resultat.getBytes()[2] == '1'){
-                        InMemoryFlyRepository flRepo = new InMemoryFlyRepository();
-                        List<Flight> flight = flRepo.loadAll();
-                        ui.displayListFlight(flight);
-                    }
-                    if(resultat.getBytes()[2] == '2'){
-                        InMemoryFlyDateRepository flRepo = new InMemoryFlyDateRepository();
-                        List<FlyDate> flightdate = flRepo.loadAll();
-                        ui.displayListFlightDate(flightdate);
-                    }
-                    if(resultat.getBytes()[2] == '3'){
-                        InMemoryFlyTicketRepository flRepo = new InMemoryFlyTicketRepository();
-                        List<FlightTicket> flight = flRepo.loadAll();
-                        ui.displayListFlightTicket(flight);
-                    }
-                    if(resultat.getBytes()[2] == '4'){
-                        InMemoryPlaceRepository flRepo = new InMemoryPlaceRepository();
-                        List<Location> locations = flRepo.loadAll();
-                        ui.displayListPlace(locations);
-                    }
-                    if(resultat.getBytes()[2] == '5'){
-                        InMemoryReservationRepository flRepo = new InMemoryReservationRepository();
-                        List<Reservation> flight = flRepo.loadAll();
-                        ui.displayListReservation(flight);
-                    }
-                    if(resultat.getBytes()[2] == '6'){
-                        InMemoryServiceRepository flRepo = new InMemoryServiceRepository();
-                        List<Service> flight = flRepo.loadAll();
-                        ui.displayListService(flight);
-                    }
-                    if(resultat.getBytes()[2] == '7'){
-                        InMemoryServicePlaceRepository flRepo = new InMemoryServicePlaceRepository();
-                        List<ServicePlace> flight = flRepo.loadAll();
-                        ui.displayListServicePlace(flight);
-                    }
-                    if(resultat.getBytes()[2] == '8'){
-                        InMemoryServicePlaceDateRepository flRepo = new InMemoryServicePlaceDateRepository();
-                        List<ServicePlaceDate> flight = flRepo.loadAll();
-                        ui.displayListServicePlaceDate(flight);
-                    }
+                    if(resultat.getBytes()[2] == '1') ui.displayListFlight(getFlights());
+                    if(resultat.getBytes()[2] == '2') ui.displayListFlightDate(getFlightsDate());
+                    if(resultat.getBytes()[2] == '3') ui.displayListFlightTicket(getTickets());
+                    if(resultat.getBytes()[2] == '4') ui.displayListPlace(getLocations());
+                    if(resultat.getBytes()[2] == '5') ui.displayListReservation(getReservations());
+                    if(resultat.getBytes()[2] == '6') ui.displayListService(getServices());
+                    if(resultat.getBytes()[2] == '7') ui.displayListServicePlace(getServicesPlace());
+                    if(resultat.getBytes()[2] == '8') ui.displayListServicePlaceDate(getServicesPlaceDate());
+                } else if(resultat.getBytes()[0] == 'W') {
+                    if(resultat.getBytes()[2] == '1') if(new InMemoryFlyRepository().save(ui.writeFlight(getLocations())) == -1) ui.flightAlreadyExist();
+                    if(resultat.getBytes()[2] == '2') ui.writeFlightDate();
+                    if(resultat.getBytes()[2] == '3') ui.writeTicket();
+                    if(resultat.getBytes()[2] == '4') ui.writePlace();
+                    if(resultat.getBytes()[2] == '5') ui.writeReservation();
+                    if(resultat.getBytes()[2] == '6') ui.writeService();
+                    if(resultat.getBytes()[2] == '7') ui.writeServicePlace();
+                    if(resultat.getBytes()[2] == '8') ui.writeServiceDatePlace();
                 }
             }
         }
+    }
+
+    private static List<ServicePlaceDate> getServicesPlaceDate() {
+        InMemoryServicePlaceDateRepository flRepo = new InMemoryServicePlaceDateRepository();
+        return flRepo.loadAll();
+    }
+
+    private static List<ServicePlace> getServicesPlace() {
+        InMemoryServicePlaceRepository flRepo = new InMemoryServicePlaceRepository();
+        return flRepo.loadAll();
+    }
+
+    private static List<Service> getServices() {
+        InMemoryServiceRepository flRepo = new InMemoryServiceRepository();
+        return flRepo.loadAll();
+    }
+
+    private static List<Reservation> getReservations() {
+        InMemoryReservationRepository flRepo = new InMemoryReservationRepository();
+        return flRepo.loadAll();
+    }
+
+    private static List<Location> getLocations() {
+        InMemoryPlaceRepository flRepo = new InMemoryPlaceRepository();
+        return flRepo.loadAll();
+    }
+
+    private static List<FlightTicket> getTickets() {
+        InMemoryFlyTicketRepository flRepo = new InMemoryFlyTicketRepository();
+        return flRepo.loadAll();
+    }
+
+    private static List<FlyDate> getFlightsDate() {
+        InMemoryFlyDateRepository flRepo = new InMemoryFlyDateRepository();
+        return flRepo.loadAll();
+    }
+
+    private static List<Flight> getFlights() {
+        InMemoryFlyRepository flRepo = new InMemoryFlyRepository();
+        return flRepo.loadAll();
     }
 }
