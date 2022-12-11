@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="YourDreamTravel:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/YourDreamTravel_jar</output-path>
+    <root id="archive" name="YourDreamTravel.jar">
+      <element id="module-output" name="YourDreamTravel" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/gson-2.10.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

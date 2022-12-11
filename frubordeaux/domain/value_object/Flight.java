@@ -40,4 +40,10 @@ public class Flight implements Displayable {
         if(flight.from.equals(from) && flight.to.equals(to)) return true;
         return false;
     }
+
+    public String displayCompact() {
+        String str = "";
+        str += ("Flight :\n\t- From : " + getFrom().displayCompact() + "\t- Too : " + to.displayCompact());
+        return str;
+    }
 }

@@ -9,7 +9,7 @@ public interface FlyTicketRepository {
 
     FlightTicket load(UUID ID);
 
-    void save(FlightTicket reservation);
+    int save(FlightTicket reservation);
 
     void update(FlightTicket flyTicket);
 

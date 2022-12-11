@@ -4,11 +4,13 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import frubordeaux.domain.iRepository.FlyReposittory;
 import frubordeaux.domain.value_object.Flight;
+import frubordeaux.domain.value_object.Location;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -63,5 +65,16 @@ public class InMemoryFlyRepository implements FlyReposittory {
             throw new RuntimeException(e);
         }
         return objects;
+    }
+
+    @Override
+    public List<Flight> load(Location from) {
+        List<Flight> res = new ArrayList<>();
+        List<Flight> objects = loadAll();
+        for(Flight obj : objects) {
+            if (obj.getFrom().equals(from))
+                res.add(obj);
+        }
+        return res;
     }
 }

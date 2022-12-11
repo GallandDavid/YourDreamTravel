@@ -10,7 +10,7 @@ public interface PlaceRepository {
 
     Location load(UUID ID) throws IOException;
 
-    void save(Location reservation);
+    int save(Location reservation);
 
     List<Location> loadAll();
 }

@@ -34,14 +34,14 @@ public class InMemoryPlaceRepository implements PlaceRepository {
     }
 
     @Override
-    public void save(Location location) {
+    public int save(Location location) {
         Gson gson = new Gson();
         List<Location> objects = loadAll();
         boolean find = false;
         for(Location obj : objects){
             if(obj.getID() == location.getID()){
                 find = true;
-                //update(place)
+                return -1;
             }
         }
         if(!find) {
@@ -52,6 +52,7 @@ public class InMemoryPlaceRepository implements PlaceRepository {
                 e.printStackTrace();
             }
         }
+        return 0;
     }
 
     @Override

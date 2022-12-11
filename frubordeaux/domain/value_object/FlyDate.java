@@ -3,7 +3,6 @@ package frubordeaux.domain.value_object;
 import com.google.gson.annotations.SerializedName;
 import frubordeaux.domain.Displayable;
 
-import java.util.Date;
 import java.util.UUID;
 
 //modification du value object pour permettre de savoir combien de ticket il reste
@@ -60,10 +59,29 @@ public class FlyDate  implements Displayable {
     @Override
     public String displayRead() {
         String str = flight.displayRead();
-        str += "Who taking of the " + date + "\n";
+        str += "Who taking of the " + date.dateFormat() + "\n";
         str += "Have the n°" + ID + "\n";
         str += "It remains " + nbTickets +" :\n";
         str += "\t- " + nbReducedTickets + " reduced tickets\n\t- " + nbFirstTickets + " first class tickets\n";
         return str;
+    }
+
+    @Override
+    public boolean equals(Object obj){
+        FlyDate flightDate = (FlyDate) obj;
+        if(ID.equals(flightDate.ID)) return true;
+        return false;
+    }
+
+    public String displayCompact() {
+        String str = "At : " + date.dateFormat() + "\n";
+        str += "Have the n°" + ID + "\n";
+        str += "It remains " + nbTickets +" tickets :";
+        str += "\t" + nbReducedTickets + " reduced tickets; " + nbFirstTickets + " first class tickets\n";
+        return str;
+    }
+
+    public Double getPrice() {
+        return price;
     }
 }

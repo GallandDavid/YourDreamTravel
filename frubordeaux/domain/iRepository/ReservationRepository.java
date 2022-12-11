@@ -8,7 +8,7 @@ import java.util.UUID;
 public interface ReservationRepository {
     Reservation load(UUID ID);
 
-    void save(Reservation reservation);
+    int save(Reservation reservation);
 
     void update(Reservation reservation);
 

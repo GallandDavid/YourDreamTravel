@@ -2,9 +2,10 @@ package frubordeaux.domain.entity;
 
 import com.google.gson.annotations.SerializedName;
 import frubordeaux.domain.Displayable;
+import frubordeaux.domain.value_object.Date;
 import frubordeaux.domain.value_object.Flight;
 
-import java.util.Date;
+
 import java.util.UUID;
 
 public class FlightTicket implements Displayable {
@@ -29,8 +30,9 @@ public class FlightTicket implements Displayable {
         this.date = date;
         this.quantity = quantity;
         this.ticket_price = ticket_price;
-        this.price = getPrice();
         this.percentageReduction = percentageReduction;
+        this.price = getPrice();
+
     }
 
     /**
@@ -80,17 +82,18 @@ public class FlightTicket implements Displayable {
         return quantity;
     }
     public Double getPrice() {
-        return price;
+        if(percentageReduction == 0) return ticket_price * quantity;
+        return ((ticket_price + (ticket_price * percentageReduction /100)) * quantity);
     }
 
     @Override
     public String displayRead() {
         String str = "Flight ticket n°" + ID + "\n";
-        str += "The " + date + "\n";
-        str += "For the flight : " + "\n" + flight.displayRead();
-        str += "For " + quantity + " people" + "\n";
-        str += "With " + percentageReduction + "%" + "\n";
-        str += "Cost : " + price + "€" + "\n";
+        str = str + "The " + date.dateFormat() + "\n";
+        str = str + "For the flight : " + "\n" + flight.displayRead();
+        str = str + "For " + quantity + " people" + "\n";
+        str = str + "With " + percentageReduction + "%" + "\n";
+        str = str + "Cost : " + price + "€" + "\n";
         return str;
     }
 }

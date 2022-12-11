@@ -5,6 +5,8 @@ import frubordeaux.domain.entity.FlightTicket;
 import frubordeaux.domain.entity.ServicePlace;
 import frubordeaux.domain.value_object.*;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -33,9 +35,19 @@ public class UI {
                 menuIndice = 1;
             }else if(input.equals("2")) {
                 menuIndice = 2;
-            }else if(input.equals("3")) {
-                menuIndice = 3;
             }
+        }else if(menuIndice == 1){
+            if(input.equals("0")) menuIndice = 0;
+            else if(input.equals("1")){
+                menuIndice = 11;
+                return "r 1";
+            }
+            else if(input.equals("2")){
+                menuIndice = 12;
+                return "r 2";
+            }
+        }else if(menuIndice == 11){
+        }else if(menuIndice == 12){
         }else if(menuIndice == 2){
             if(input.equals("0")) menuIndice = 0;
             else if(input.equals("1")) menuIndice = 21;
@@ -53,8 +65,8 @@ public class UI {
         }else if(menuIndice == 22){
             if(input.equals("0")) menuIndice = 0;
             else if(input.equals("1")) return "W 1";
-            else if(input.equals("2")) return "w 2";
-            else if(input.equals("3")) return "w 3";
+            else if(input.equals("2")) return "W 2";
+            else if(input.equals("3")) return "W 3";
             else if(input.equals("4")) return "W 4";
             else if(input.equals("5")) return "W 5";
             else if(input.equals("6")) return "W 6";
@@ -68,7 +80,7 @@ public class UI {
         if(menuIndice == 0){
             chooseMainAction();
         }else if(menuIndice == 1){
-
+            displayReservationAction();
         }else if(menuIndice == 10){
 
         }else if(menuIndice == 2){
@@ -81,6 +93,13 @@ public class UI {
 
         }
     }
+
+    private void displayReservationAction() {
+        System.out.println("0) Back ");
+        System.out.println("1) Choose Flights ");
+        System.out.println("2) Create a travel");
+    }
+
     private void chooseData() {
         System.out.println("0) Back ");
         System.out.println("1) Flight ");
@@ -163,71 +182,224 @@ public class UI {
         }
     }
 
-    public Flight writeFlight(List<Location> locations) {
-        Location from = null;
-        Location to = null;
-        Integer from_index = -1;
+    public Flight chooseAFlight(List<Flight> flights){
+        Integer input_int;
         String input;
-        Integer imput_int;
         Scanner myObj = new Scanner(System.in);
-        System.out.println("Add a new Flight on data base :");
+        while(true) {
+            System.out.println("Choose a Flight by a number:");
+            for (Integer i = 0; i < flights.size(); i++) {
+                System.out.println();
+                System.out.println("\t" + (i + 1) + ") " + flights.get(i).displayCompact());
+            }
+            input = myObj.nextLine();
+            input_int = Integer.parseInt(input);
+            if (input_int >= 1 && input_int <= flights.size()) {
+                return flights.get(input_int - 1);
+            }
+        }
+    }
+
+    public FlyDate chooseAFlightDate(List<FlyDate> flightDates){
+        Integer input_int;
+        String input;
+        Scanner myObj = new Scanner(System.in);
+        if(!flightDates.isEmpty()) System.out.println(flightDates.get(0).getFly().displayCompact());
+        while(true) {
+            System.out.println("Choose a date by a number:");
+            for (Integer i = 0; i < flightDates.size(); i++) {
+                System.out.println();
+                System.out.println("\t" + (i + 1) + ") " + flightDates.get(i).displayCompact());
+            }
+            input = myObj.nextLine();
+            input_int = Integer.parseInt(input);
+            if (input_int >= 1 && input_int <= flightDates.size()) {
+                return flightDates.get(input_int - 1);
+            }
+        }
+    }
+    
+    public List<Location> chooseADepartureLocation(List<Location> locations, Integer nbLocation){
+        String input;
+        Integer input_int;
+        Integer curLocation = 0;
+        Scanner myObj = new Scanner(System.in);
+        List<Location> locations_res = new ArrayList<>();
+        List<Integer> alreadySelected = new ArrayList<>();
         boolean running = true;
         while(running) {
-            System.out.println("Choose a departure location by a number:");
+            if(curLocation == 1) System.out.println("Choose an arrival location by a number:");
+            if(curLocation == 0) System.out.println("Choose a departure location by a number:");
             for (Integer i = 0; i < locations.size(); i++) {
                 System.out.println();
                 System.out.println("\t" + (i + 1) + ") " + locations.get(i).displayCompact());
             }
             input = myObj.nextLine();
-            imput_int = Integer.parseInt(input);
-            if (imput_int >= 1 && imput_int <= locations.size()) {
-                from = locations.get(imput_int - 1);
-                from_index = imput_int - 1;
-                running = false;
-            }
+            input_int = Integer.parseInt(input);
+            if (input_int >= 1 && input_int <= locations.size()) {
+                locations_res.add(locations.get(input_int - 1));
+                alreadySelected.add(input_int - 1);
+                curLocation ++;
+            } else System.out.println("Bad arguments, try again");
+            if(nbLocation == curLocation) running = false;
         }
-        running = true;
-        while(running) {
-            System.out.println("Choose a place of arrival by a number:");
-            for (Integer i = 0; i < locations.size(); i++) {
-                if(!(from_index == i)) {
-                    System.out.println();
-                    System.out.println("\t" + (i + 1) + ") " + locations.get(i).displayCompact());
-                }
-            }
-            input = myObj.nextLine();
-            imput_int = Integer.parseInt(input);
-            if (imput_int >= 1 && imput_int <= locations.size()){
-                to = locations.get(imput_int - 1);
-                running = false;
-            }
+        return locations_res;
+    }
+
+    public Flight writeFlight(List<Location> locations) {
+        Location from = null;
+        Location to = null;
+        Integer from_index = -1;
+        String input;
+        Integer input_int;
+        Scanner myObj = new Scanner(System.in);
+        System.out.println("Add a new Flight on data base :");
+        List<Location> loc = chooseADepartureLocation(locations,2);
+        return new Flight(loc.get(0),loc.get(1));
+    }
+
+    public FlyDate writeFlightDate(List<Flight> flights) {
+        Integer year,month,day,hour,minutes,nbTickets,nbFirstTickets,nbReducedTickets,input_int = 0;
+        Flight flight = null;
+        LocalDateTime date = null;
+        Double price,input_double = 0.0;
+        String input;
+        Scanner myObj = new Scanner(System.in);
+        System.out.println("Add a new Date for a Flight on data base :");
+        flight = chooseAFlight(flights);
+        System.out.println("Choose a Date for the departure : ");
+        System.out.println("Choose the Year : ");
+        input = myObj.nextLine();
+        year = Integer.parseInt(input);
+        System.out.println("Choose the Month : ");
+        input = myObj.nextLine();
+        month = Integer.parseInt(input);
+        System.out.println("Choose the Day : ");
+        input = myObj.nextLine();
+        day = Integer.parseInt(input);
+        System.out.println("Choose the Hour : ");
+        input = myObj.nextLine();
+        hour = Integer.parseInt(input);
+        System.out.println("Choose the Minute : ");
+        input = myObj.nextLine();
+        minutes = Integer.parseInt(input);
+        date =  LocalDateTime.of(year,month,day,hour,minutes,0);
+
+        System.out.println("Enter a Price for 1 regular tickets \"x.x\" : ");
+        input = myObj.nextLine();
+        input_double = Double.parseDouble(input);
+        price = input_double;
+
+        System.out.println("Enter the total number of tickets : ");
+        input = myObj.nextLine();
+        input_int = Integer.parseInt(input);
+        nbTickets = input_int;
+
+        System.out.println("Enter the number of First tickets : ");
+        input = myObj.nextLine();
+        input_int = Integer.parseInt(input);
+        nbFirstTickets = input_int;
+
+        System.out.println("Enter the number of Reduced tickets : ");
+        input = myObj.nextLine();
+        input_int = Integer.parseInt(input);
+        nbReducedTickets = input_int;
+
+        return new FlyDate(flight,new Date(date), nbTickets, nbFirstTickets, nbReducedTickets, price);
+    }
+
+    public void writeTicket() {}
+    public Location writePlace() {
+        String city,country;
+        Scanner myObj = new Scanner(System.in);
+        System.out.println("Add a new Place into data base :");
+        System.out.println("Choose the city name : ");
+        city = myObj.nextLine();
+        System.out.println("Choose the country name : ");
+        country = myObj.nextLine();
+        return new Location(city,country);
+    }
+    public void writeReservation() {}
+    public void writeService() {}
+    public void writeServicePlace() {}
+    public void writeServiceDatePlace() {}
+    public void AlreadyExist() {System.out.println("Sorry, this data already exist. Try again");}
+    public void displayFlightReservation() {System.out.println("This is if you want to purchase a flight and you just know where it leave");}
+    public void displayFlightDateSelection() {System.out.println("Select a date for the departure");}
+    public void displayFlightSelection(){System.out.println("Select a flight for this departure location");}
+    public void displayTicketType() {System.out.println("Select a reduction for your ticket");}
+
+    public Integer chooseTicketType(Double ticketPrice, Integer nbTickets, Integer nbReducedTickets, Integer nbFirstTickets) {
+        Scanner myObj = new Scanner(System.in);
+        boolean find = true;
+        Integer res = -1;
+        while(find) {
+            System.out.println("Select the kind of ticket you want :");
+            System.out.println("Total ticket : " + nbTickets);
+            System.out.println("1) Reduced ticket : " + nbTickets + ", " + (ticketPrice - (ticketPrice * 20 / 100)) + "€");
+            System.out.println("2) Regular ticket : " + nbTickets + ", " + ticketPrice + "€");
+            System.out.println("3) First class ticket : " + nbTickets + ", " + (ticketPrice + (ticketPrice * 30 / 100)) + "€");
+            res = Integer.parseInt(myObj.nextLine());
+            if(res == 1) return -20;
+            if(res == 2) return 0;
+            if(res == 3) return 30;
         }
-        return new Flight(from,to);
+        return -1;
     }
 
-    public void writeFlightDate() {
+    public void displayNbTicket() {System.out.println("Select how many sit you want take");}
+
+    public Integer chooseNbTickets(int i, Integer nbTickets) {
+        Scanner myObj = new Scanner(System.in);
+        boolean find = true;
+        Integer res = -1;
+        while(find) {
+            if(i == 0) System.out.println("Regular ticket remains : " + nbTickets);
+            if(i == 1) System.out.println("Reduced ticket remains : " + nbTickets);
+            if(i == 2) System.out.println("First class ticket remains : " + nbTickets);
+            res = Integer.parseInt(myObj.nextLine());
+            if(res > 0 && res <= nbTickets) return res;
+        }
+        return -1;
     }
 
-    public void writeTicket() {
+    public void displayTicket(FlightTicket flightTicket){
+        System.out.println("Your ticket :");
+        System.out.println(flightTicket.displayRead());
     }
 
-    public void writePlace() {
+    public void displayNewTicket() {System.out.println("Want to Add a new travel? :");}
+
+    public boolean chooseYesNo() {
+        Scanner myObj = new Scanner(System.in);
+        boolean find = true;
+        Integer res = -1;
+        while(find) {
+            System.out.println("1) Yes");
+            System.out.println("2) No");
+            try {
+                res = Integer.parseInt(myObj.nextLine());
+            }catch (NumberFormatException e) {
+
+            }
+            if(res == 1) return true;
+            if(res == 2) return false;
+        }
+        return false;
     }
 
-    public void writeReservation() {
+    public void displayValidate() {System.out.println("Want to validate your reservation ? :");}
+
+    public void displayAddBasket() {System.out.println("Want to add the ticket to your basket ? :");}
+
+    public void displayReservationValidation(Reservation reservation) {
+        System.out.println("Great, your command is send to our service.");
+        reservation.displayValidate();
+        System.out.println("We will send you buy's information for finalised the operation");
     }
 
-    public void writeService() {
-    }
-
-    public void writeServicePlace() {
-    }
-
-    public void writeServiceDatePlace() {
-    }
-
-    public void flightAlreadyExist() {
-        System.out.println("Sorry, this flight already exist. Try again");
-
+    public void reset() {
+        menuIndice = 0;
     }
 }
+

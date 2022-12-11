@@ -1,4 +1,7 @@
-[
-  {},
-  {}
+[{"ID":"134e4567-e89b-12d3-a456-426614174000","flight": {"ID":"124e4567-e89b-12d3-a456-426614174000","from":{"ID":"123e4507-e89b-12d3-a456-426614174000","name":"Bordeaux","country":"France"},"too":{"ID":"123e4567-e89b-12d3-a456-426614174000","name":"Paris","country":"France"}},
+  "date": {"date" : "20/02/2023 08:56"},
+  "price": 250.0,
+"nbTickets": 600,
+"nbFirstTickets":  200,
+"nbReducedTickets":  150}
 ]

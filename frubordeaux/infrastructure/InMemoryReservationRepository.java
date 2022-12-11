@@ -1,7 +1,10 @@
 package frubordeaux.infrastructure;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import frubordeaux.domain.LocalDateTimeDeserializer;
+import frubordeaux.domain.LocalDateTimeSerializer;
 import frubordeaux.domain.agregate.Reservation;
 import frubordeaux.domain.iRepository.ReservationRepository;
 
@@ -9,6 +12,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -30,14 +34,18 @@ public class InMemoryReservationRepository implements ReservationRepository {
     }
 
     @Override
-    public void save(Reservation reservation) {
-        Gson gson = new Gson();
+    public int save(Reservation reservation) {
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeSerializer());
+        gsonBuilder.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeDeserializer());
+        Gson gson = gsonBuilder.setPrettyPrinting().create();
         List<Reservation> objects = loadAll();
         boolean find = false;
         for(Reservation obj : objects){
             if(obj.getID() == reservation.getID()){
                 find = true;
                 update(reservation);
+                return -1;
             }
         }
         if(!find) {
@@ -48,6 +56,7 @@ public class InMemoryReservationRepository implements ReservationRepository {
                 e.printStackTrace();
             }
         }
+        return 0;
     }
 
     @Override
@@ -57,7 +66,10 @@ public class InMemoryReservationRepository implements ReservationRepository {
 
     @Override
     public List<Reservation> loadAll() {
-        Gson gson = new Gson();
+        GsonBuilder gsonBuilder = new GsonBuilder();
+        gsonBuilder.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeSerializer());
+        gsonBuilder.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeDeserializer());
+        Gson gson = gsonBuilder.setPrettyPrinting().create();
         // 1. JSON file to Java object
         List<Reservation> objects = null;
         try {

@@ -60,7 +60,7 @@ public class Reservation  implements Displayable {
      * @param fly
      */
     public void addFlight(FlightTicket fly){
-        if(flights.contains(fly.getID())){
+        if(!flights.contains(fly.getID())){
             boolean find = false;
             for (FlightTicket flyTicket : flights) {
                 if(flyTicket.getID().equals(fly.getID())){
@@ -137,5 +137,12 @@ public class Reservation  implements Displayable {
         for(FlightTicket flt : flights) str += flt.displayRead();
         str += "This travel cost : " + price + "€" + "\n";
         return str;
+    }
+
+    public void displayValidate() {
+    }
+
+    public ArrayList<FlightTicket> getFlightTicket() {
+        return flights;
     }
 }
