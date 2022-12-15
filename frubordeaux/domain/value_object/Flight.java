@@ -43,7 +43,7 @@ public class Flight implements Displayable {
 
     public String displayCompact() {
         String str = "";
-        str += ("Flight :\n\t- From : " + getFrom().displayCompact() + "\t- Too : " + to.displayCompact());
+        str += ("Flight :\n\t- From : " + getFrom().displayCompact() + "\t- To : " + to.displayCompact());
         return str;
     }
 }

@@ -6,7 +6,7 @@ import frubordeaux.domain.Displayable;
 import java.util.UUID;
 
 //modification du value object pour permettre de savoir combien de ticket il reste
-public class FlyDate  implements Displayable {
+public class FlightDate implements Displayable {
     @SerializedName("ID")
     private final UUID ID = UUID.randomUUID();
     @SerializedName("flight")
@@ -22,7 +22,7 @@ public class FlyDate  implements Displayable {
     @SerializedName("nbReducedTickets")
     private Integer nbReducedTickets;
 
-    public FlyDate(Flight flight, Date date, Integer nbTickets, Integer nbFirstTickets, Integer nbReducedTickets, Double price){
+    public FlightDate(Flight flight, Date date, Integer nbTickets, Integer nbFirstTickets, Integer nbReducedTickets, Double price){
         this.flight = flight;
         this.price = price;
         this.date = date;
@@ -59,16 +59,16 @@ public class FlyDate  implements Displayable {
     @Override
     public String displayRead() {
         String str = flight.displayRead();
-        str += "Who taking of the " + date.dateFormat() + "\n";
-        str += "Have the n°" + ID + "\n";
-        str += "It remains " + nbTickets +" :\n";
-        str += "\t- " + nbReducedTickets + " reduced tickets\n\t- " + nbFirstTickets + " first class tickets\n";
+        str += "Who taking of the " + date.dateFormat() + "\n" +
+        "Have the n°" + ID + "\n" +
+        "It remains " + nbTickets +" :\n" +
+        "\t- " + nbReducedTickets + " reduced tickets\n\t- " + nbFirstTickets + " first class tickets\n";
         return str;
     }
 
     @Override
     public boolean equals(Object obj){
-        FlyDate flightDate = (FlyDate) obj;
+        FlightDate flightDate = (FlightDate) obj;
         if(ID.equals(flightDate.ID)) return true;
         return false;
     }

@@ -1,19 +1,19 @@
 package frubordeaux.domain.iRepository;
 
 import frubordeaux.domain.value_object.Flight;
-import frubordeaux.domain.value_object.FlyDate;
+import frubordeaux.domain.value_object.FlightDate;
 
 import java.util.List;
 import java.util.UUID;
 
 public interface FlyDateRepository {
-    FlyDate load(UUID ID);
+    FlightDate load(UUID ID);
 
-    List<FlyDate> load(Flight flight);
+    List<FlightDate> load(Flight flight);
 
-    int save(FlyDate reservation);
+    int save(FlightDate reservation);
 
-    void update(FlyDate flyDate);
+    void update(FlightDate flightDate);
 
-    List<FlyDate> loadAll();
+    List<FlightDate> loadAll();
 }

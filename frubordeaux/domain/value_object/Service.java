@@ -6,14 +6,14 @@ import java.util.UUID;
 
 public class Service implements Displayable {
 
-    public UUID getID() {
-        return ID;
-    }
-
     public UUID ID;
 
     public Service(){
         ID = UUID.randomUUID();
+    }
+
+    public UUID getID() {
+        return ID;
     }
 
     @Override

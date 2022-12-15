@@ -7,7 +7,7 @@ import frubordeaux.domain.LocalDateTimeDeserializer;
 import frubordeaux.domain.LocalDateTimeSerializer;
 import frubordeaux.domain.iRepository.FlyDateRepository;
 import frubordeaux.domain.value_object.Flight;
-import frubordeaux.domain.value_object.FlyDate;
+import frubordeaux.domain.value_object.FlightDate;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -21,9 +21,9 @@ public class InMemoryFlyDateRepository implements FlyDateRepository {
     public String fileDB = "frubordeaux/database/FlyDateDB.json";
 
     @Override
-    public FlyDate load(UUID ID) {
-        List<FlyDate> objects = loadAll();
-        for(FlyDate obj : objects) {
+    public FlightDate load(UUID ID) {
+        List<FlightDate> objects = loadAll();
+        for(FlightDate obj : objects) {
             if (obj.getID().equals(ID))
                 return obj;
         }
@@ -34,44 +34,44 @@ public class InMemoryFlyDateRepository implements FlyDateRepository {
     }
 
     @Override
-    public List<FlyDate> load(Flight flight) {
-        List<FlyDate> res = new ArrayList<>();
-        List<FlyDate> objects = loadAll();
-        for(FlyDate obj : objects) {
+    public List<FlightDate> load(Flight flight) {
+        List<FlightDate> res = new ArrayList<>();
+        List<FlightDate> objects = loadAll();
+        for(FlightDate obj : objects) {
             if(obj.getFly().equals(flight)) res.add(obj);
         }
         return res;
     }
 
-    public int save2(FlyDate flyDate) {
+    public int save2(FlightDate flightDate) {
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeSerializer());
         gsonBuilder.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeDeserializer());
         Gson gson = gsonBuilder.setPrettyPrinting().create();
 
             try (FileWriter writer = new FileWriter(fileDB)) {
-                gson.toJson(flyDate, writer);
+                gson.toJson(flightDate, writer);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         return 0;
     }
     @Override
-    public int save(FlyDate flyDate) {
+    public int save(FlightDate flightDate) {
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeSerializer());
         gsonBuilder.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeDeserializer());
         Gson gson = gsonBuilder.setPrettyPrinting().create();
-        List<FlyDate> objects = loadAll();
+        List<FlightDate> objects = loadAll();
         boolean find = false;
-        for(FlyDate obj : objects){
-            if(obj.equals(flyDate)){
+        for(FlightDate obj : objects){
+            if(obj.equals(flightDate)){
                 find = true;
                 return -1;
             }
         }
         if(!find) {
-            objects.add(flyDate);
+            objects.add(flightDate);
             try (FileWriter writer = new FileWriter(fileDB)) {
                 gson.toJson(objects, writer);
             } catch (IOException e) {
@@ -82,12 +82,12 @@ public class InMemoryFlyDateRepository implements FlyDateRepository {
     }
 
     @Override
-    public void update(FlyDate flyDate) {
-        List<FlyDate> objects = loadAll();
-        for(FlyDate obj : objects){
-            if(obj.equals(flyDate)){
+    public void update(FlightDate flightDate) {
+        List<FlightDate> objects = loadAll();
+        for(FlightDate obj : objects){
+            if(obj.equals(flightDate)){
                 objects.remove(obj);
-                objects.add(flyDate);
+                objects.add(flightDate);
                 try (FileWriter writer = new FileWriter(fileDB)) {
                     GsonBuilder gsonBuilder = new GsonBuilder();
                     gsonBuilder.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeSerializer());
@@ -104,15 +104,15 @@ public class InMemoryFlyDateRepository implements FlyDateRepository {
     }
 
     @Override
-    public List<FlyDate> loadAll() {
+    public List<FlightDate> loadAll() {
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeSerializer());
         gsonBuilder.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeDeserializer());
         Gson gson = gsonBuilder.setPrettyPrinting().create();
         // 1. JSON file to Java object
-        List<FlyDate> objects = null;
+        List<FlightDate> objects = null;
         try {
-            objects = gson.fromJson(new FileReader(fileDB), new TypeToken<List<FlyDate>>() {}.getType());
+            objects = gson.fromJson(new FileReader(fileDB), new TypeToken<List<FlightDate>>() {}.getType());
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }

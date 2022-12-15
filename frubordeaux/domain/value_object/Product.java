@@ -15,6 +15,9 @@ public abstract class  Product {
         this.price = price;
     }
 
+
+    /* GETTERS */
+
     public String getRef() {
         return ref;
     }
